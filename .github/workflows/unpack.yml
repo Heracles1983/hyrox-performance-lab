@@ -1,0 +1,22 @@
+name: Expand source
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  expand:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Expand verified source archive
+        run: |
+          unzip -o hyrox-performance-lab-source.zip
+          rm hyrox-performance-lab-source.zip
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Publish HYROX Performance Lab source"
+          git push
